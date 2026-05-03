@@ -1,0 +1,303 @@
+/* App.css (Base Layout & SignTranslator styles) */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: transparent;
+  border-bottom: none;
+}
+
+header h1 {
+  margin: 0 0 0.5rem 0;
+  background: linear-gradient(90deg, #00cfff, #7b5ea7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  font-weight: 800;
+  font-size: 2.5rem;
+}
+
+header p {
+  margin: 0;
+  color: #a9a9b3;
+  font-size: 1.1rem;
+}
+
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem 1rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  flex: 1;
+  min-height: 0;
+}
+
+@media (min-width: 1024px) {
+  /* No grid template needed since we use flex */
+}
+
+/* --- LEFT PANEL (SignTranslator) --- */
+
+.translator-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.video-container {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #000;
+  box-shadow: 0 0 12px rgba(0, 207, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+}
+
+video {
+  width: 100%;
+  display: block;
+}
+
+.prediction-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.predicted-letter {
+  font-size: clamp(3rem, 6vh, 5rem);
+  font-weight: bold;
+  color: #00cfff;
+  text-align: center;
+  text-shadow: 0 0 20px rgba(0, 207, 255, 0.5);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.confidence-bar-container {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 99px;
+  height: 10px;
+  width: 80%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.confidence-bar-fill {
+  background: linear-gradient(90deg, #00cfff, #7b5ea7);
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.2s ease;
+}
+
+.confidence-text {
+  font-size: 0.85rem;
+  color: #a9a9b3;
+  margin-top: 0.5rem;
+}
+
+/* Hand Status Badge with gradient border trick */
+.status-badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 20px;
+  border-radius: 99px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 0.5rem auto 1.5rem auto;
+  width: max-content;
+  border: 1px solid transparent;
+}
+
+.status-badge.detected {
+  background: linear-gradient(#0a0d24, #0a0d24) padding-box,
+              linear-gradient(90deg, #00cfff, #7b5ea7) border-box;
+  color: #00cfff;
+}
+
+.status-badge.not-detected {
+  background: linear-gradient(#0a0d24, #0a0d24) padding-box,
+              linear-gradient(90deg, #7b5ea7, #a88be0) border-box;
+  color: #7b5ea7;
+}
+
+/* Error banner pill */
+.error-message {
+  background: rgba(255, 50, 50, 0.15);
+  border: 1px solid rgba(255, 50, 50, 0.3);
+  color: #ff6b6b;
+  padding: 0.75rem 1.5rem;
+  border-radius: 99px;
+  margin: 0.5rem 0 1.5rem 0;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  width: max-content;
+  max-width: 100%;
+}
+
+.sentence-box {
+  width: 100%;
+  flex: 1;
+  min-height: 60px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-family: inherit;
+  resize: none;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.sentence-box:focus {
+  outline: none;
+  border-color: #00cfff;
+  box-shadow: 0 0 12px rgba(0, 207, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.sentence-box::placeholder {
+  color: #a9a9b3;
+}
+
+.button-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 99px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  font-weight: bold;
+  font-family: inherit;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* CTA: Start Camera */
+.btn-green { 
+  background: linear-gradient(90deg, #00cfff, #0091ea);
+  color: white;
+  border: none;
+  box-shadow: 0 0 15px rgba(0, 207, 255, 0.3);
+}
+.btn-green:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 207, 255, 0.5);
+}
+
+/* Secondary: Stop Camera */
+.btn-red { 
+  background: rgba(255, 50, 50, 0.1);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 50, 50, 0.3);
+}
+.btn-red:hover:not(:disabled) {
+  background: rgba(255, 50, 50, 0.2);
+  box-shadow: 0 0 15px rgba(255, 50, 50, 0.3);
+}
+
+/* Outline: Clear / Copy Text */
+.btn-gray, .btn-blue { 
+  background: rgba(255, 255, 255, 0.02);
+  border: 2px solid #00cfff;
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 207, 255, 0.1);
+}
+.btn-gray:hover, .btn-blue:hover {
+  background: rgba(0, 207, 255, 0.1);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 207, 255, 0.3);
+}
+
+/* --- RESPONSIVE STYLES --- */
+@media (max-width: 1024px) {
+  .main-layout {
+    padding: 0 0.5rem 1rem 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 1rem 0.5rem !important;
+  }
+  header img {
+    height: 40px !important;
+  }
+  
+  .user-name-display {
+    display: none !important;
+  }
+  
+  .translator-card, .videocall-card {
+    padding: 1.5rem 1rem !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+  
+  .predicted-letter {
+    font-size: clamp(2rem, 10vw, 3.5rem);
+  }
+  
+  .sentence-box {
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+  
+  .button-row {
+    gap: 0.5rem !important;
+  }
+  
+  .btn {
+    padding: 0.75rem 0.5rem;
+    min-height: 44px;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.75rem 0.25rem;
+  }
+}

@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #07091a, #0d1130);
+  background-attachment: fixed;
+  color: white;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Overall layout glow blobs */
+body::before, body::after {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(140px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+body::before {
+  top: -10%; 
+  left: -10%;
+  width: 600px; 
+  height: 600px;
+  background: rgba(0, 207, 255, 0.15); /* cyan top-left */
+}
+
+body::after {
+  bottom: -10%; 
+  right: -10%;
+  width: 600px; 
+  height: 600px;
+  background: rgba(123, 94, 167, 0.15); /* purple bottom-right */
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastAPI Socket.IO Test</title>
+    <!-- Load Socket.io exactly per instructions from CDN -->
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            max-width: 600px;
+            margin: 40px auto;
+            text-align: center;
+        }
+        #status {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 5px;
+            background: #e0e0e0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>FastAPI Socket.IO System Test</h2>
+    <div id="status">Connecting...</div>
+    <button onclick="testPing()">Test Join Room</button>
+
+    <script>
+        // Connect directly to the FastAPI server running on localhost:8000
+        const socket = io("http://localhost:8000");
+        const statusDiv = document.getElementById("status");
+
+        socket.on("connect", () => {
+            console.log("Connected successfully to server.");
+            statusDiv.innerHTML = "✅ Connected! (Target ID: " + socket.id + ")";
+            statusDiv.style.backgroundColor = "#d4edda";
+            statusDiv.style.color = "#155724";
+        });
+
+        socket.on("disconnect", () => {
+            console.log("Disconnected from server.");
+            statusDiv.innerHTML = "❌ Disconnected";
+            statusDiv.style.backgroundColor = "#f8d7da";
+            statusDiv.style.color = "#721c24";
+        });
+
+        socket.on("connect_error", (err) => {
+            console.error("Connection failed:", err.message);
+            statusDiv.innerHTML = "⚠️ Failed: " + err.message;
+            statusDiv.style.backgroundColor = "#fff3cd";
+            statusDiv.style.color = "#856404";
+        });
+
+        function testPing() {
+            // Emits a test 'join_room' event to see if the server responds
+            var rawRoomId = Math.random().toString(36).substring(7);
+            socket.emit("join_room", { "room_id": "test_room_" + rawRoomId });
+        }
+        
+        socket.on("room_joined", (data) => {
+            alert("Success! The server bounced back room_joined event.\nRole assigned: " + data.role + "\nRoom ID: " + data.room_id);
+        });
+    </script>
+</body>
+</html>

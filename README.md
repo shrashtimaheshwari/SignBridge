@@ -1,4 +1,4 @@
-# Sign Language Recognition & Translation Video Calling App
+# SignBridge - Sign Language Recognition & Translation Video Calling App
 
 ## 1. PROJECT TITLE AND DESCRIPTION
 Welcome to the SignBridge - AI Sign Language Translator & Video Call Platform! This application provides a real-time 2-way peer-to-peer web video calling experience layered with local Python-driven Artificial Intelligence that reads your hand patterns and translates your American Sign Language (ASL) alphabets into continuous floating subtitles for the person on the other end.

@@ -13,10 +13,14 @@ if __name__ == "__main__":
 
     print("🚀 Starting ML Service using the 'signlang' conda environment...")
     
+    # Get the project root directory (one level up from this script)
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    
     # This completely bypasses VS Code terminal issues by forcing the correct Python
     try:
         subprocess.run(
             [CONDA_PYTHON, "-m", "uvicorn", "ml_service.ml_server:app", "--port", "8001"],
+            cwd=project_root,
             check=True
         )
     except KeyboardInterrupt:
